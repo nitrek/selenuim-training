@@ -9,6 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -22,36 +24,38 @@ public class MouseEvents {
 
 		WebDriver driver = DriverFactory.getDriverFor(Config.BROWSER_NAME);
 		WebDriverWait wait = new WebDriverWait(driver, 50);
-		
-		driver.get("https://www.naukri.com/");
+		Actions actions = new Actions(driver);
+	/*	
+		driver.get("https://api.jquery.com/dblclick/");
 		driver.manage().window().maximize();
-
 		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("input_resumeParser")));
-		String fpath ="C:\\Users\\adm\\Desktop\\data\\Resume.docx";
-		driver.findElement(By.id("input_resumeParser")).click();//.sendKeys(fpath);
-		try {
-		Robot robot = new Robot();
-		Clipboard clipboard =Toolkit.getDefaultToolkit().getSystemClipboard();
-		clipboard.setContents(new StringSelection(fpath), null);
-		Thread.sleep(1000);
-		robot.keyPress(KeyEvent.VK_CONTROL);
-		robot.keyPress(KeyEvent.VK_V);
-		robot.keyRelease(KeyEvent.VK_CONTROL);
-		robot.keyRelease(KeyEvent.VK_V);
-		Thread.sleep(1000);
-		robot.keyPress(KeyEvent.VK_ENTER);
-		robot.keyRelease(KeyEvent.VK_ENTER);
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
 		
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.id("bd_name")));
-		driver.findElement(By.id("bd_name")).sendKeys("Test Name");
+		//WebElement element = driver.findElement(By.linkText("Support"));
 		
+			
+//		actions.moveToElement(element);
+		driver.findElement(By.linkText("Forum")).click();
+		driver.get("https://swisnl.github.io/jQuery-contextMenu/demo.html");
+		WebElement element = driver.findElement(By.xpath("/html/body/div/section/div/div/div/p/span"));
+		actions.contextClick(element).build().perform();
+		//Drag and drop
+		*/
+		Thread.sleep(3000);
+		driver.get("https://www.w3schools.com/Html/tryit.asp?filename=tryhtml5_draganddrop");
+		driver.manage().window().maximize();
+		driver.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
+		WebElement iframe = driver.findElement(By.id("iframeResult"));
+		driver.switchTo().frame(iframe);
 		
+		Thread.sleep(10000);
+		WebElement source = driver.findElement(By.id("drag1"));
+		System.out.println("drag1 found");
+		
+		WebElement target = driver.findElement(By.id("div1"));
+		System.out.println("div1 found");
+		actions.dragAndDrop(source, target).build().perform();
+		System.out.println("drag drop done");
+		//driver.close();
 	}
 
 }
