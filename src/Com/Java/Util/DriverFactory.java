@@ -10,7 +10,7 @@ public class DriverFactory {
 	public static WebDriver getDriverFor(String brName) {
 		switch (brName.toLowerCase()) {
 		case "chrome":
-			System.setProperty("webdriver.chrome.driver", "C:\\Software\\Browser\\chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver", "browser\\chromedriver.exe");
 			ChromeOptions Coption = new ChromeOptions();
 			Coption.addArguments("--disable-notifications");
 			return new ChromeDriver(Coption);
